@@ -12,7 +12,6 @@ $email=$_REQUEST['email'];
 $adresse=$_REQUEST['adresse'];
 $pwd=$_REQUEST['pwd'];
 $cpwd=$_REQUEST['cpwd'];
-
 $classe=$_REQUEST['classe'];
 
 

@@ -1,5 +1,5 @@
 // Recuperer notre Form depuis le DOM.
-const form = document.getElementById("myform");
+const form = document.getElementById("insForm");
 const submitButton = form.querySelector("button");
     
 // TODO: Task 1 - Recuperer les elements Passwords 
@@ -34,6 +34,3 @@ const addPasswordInputEventListeners = function () {
 };
 
 addPasswordInputEventListeners();
-
-
-
