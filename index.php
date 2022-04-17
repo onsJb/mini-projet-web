@@ -46,7 +46,7 @@
   <body>
     
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <a class="navbar-brand" href="index.html">SCO-Enicar</a>
+  <a class="navbar-brand" href="index.php">SCO-Enicar</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -59,21 +59,21 @@
   
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="index.php" id="dropdown01" data-toggle="dropdown" aria-expanded="false">Gestion des Groupes</a>        <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="afficherEtudiants.html">Lister tous les étudiants</a>
-          <a class="dropdown-item" href="afficherEtudiantsParClasse.html">Etudiants par Groupe</a>
-          <a class="dropdown-item" href="ajouterGroupe.html">Ajouter Groupe</a>
-          <a class="dropdown-item" href="modifierGroupe.html">Modifier Groupe</a>
-          <a class="dropdown-item" href="supprimerGroupe.html">Supprimer Groupe</a>
+          <a class="dropdown-item" href="afficherEtudiants.php">Lister tous les étudiants</a>
+          <a class="dropdown-item" href="afficherEtudiantsParClasse.php">Etudiants par Groupe</a>
+          <a class="dropdown-item" href="ajouterGroupe.php">Ajouter Groupe</a>
+          <a class="dropdown-item" href="modifierGroupe.php">Modifier Groupe</a>
+          <a class="dropdown-item" href="supprimerGroupe.php">Supprimer Groupe</a>
 
         </div>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-expanded="false">Gestion des Etudiants</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="ajouterEtudiant.html">Ajouter Etudiant</a>
-          <a class="dropdown-item" href="chercherEtudiant.html">Chercher Etudiant</a>
-          <a class="dropdown-item" href="modifierEtudiant.html">Modifier Etudiant</a>
-          <a class="dropdown-item" href="supprimerEtudiant.html">Supprimer Etudiant</a>
+          <a class="dropdown-item" href="ajouterEtudiant.php">Ajouter Etudiant</a>
+          <a class="dropdown-item" href="chercherEtudiant.php">Chercher Etudiant</a>
+          <a class="dropdown-item" href="modifierEtudiant.php">Modifier Etudiant</a>
+          <a class="dropdown-item" href="supprimerEtudiant.php">Supprimer Etudiant</a>
 
 
         </div>

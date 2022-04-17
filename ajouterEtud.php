@@ -26,5 +26,6 @@ include("connexion.php");
             $reponse = $pdo->exec($req) or die("error");
             $erreur ="OK";
          }  
+         echo $erreur;
 }
 ?>

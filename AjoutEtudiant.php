@@ -1,3 +1,35 @@
+<?php
+	session_start();
+	if($_SESSION["autoriser"]!="oui"){
+      header("location:login.php");
+      exit();
+   }
+   else {
+    $cin=$_REQUEST['cin'];
+    $nom=$_REQUEST['nom'];
+    $prenom=$_REQUEST['prenom'];
+    $email=$_REQUEST['email'];
+    $adresse=$_REQUEST['adresse'];
+    $pwd=$_REQUEST['pwd'];
+    $cpwd=$_REQUEST['cpwd'];
+    $classe=$_REQUEST['classe'];
+    
+    
+    include("connexion.php");
+             $sel=$pdo->prepare("select cin from etudiant where cin=? limit 1");
+             $sel->execute(array($cin));
+             $tab=$sel->fetchAll();
+             if(count($tab)>0)
+                $erreur="NOT OK";// Etudiant existe déja
+             else{
+                $req="insert into etudiant values ($cin,'$email',md5('$pwd'),md5('$cpwd'),'$nom','$prenom','$adresse','$classe')";
+                $reponse = $pdo->exec($req) or die("error");
+                $erreur ="OK";
+             }  
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +49,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="index.php">SCO-Enicar</a>
+        <a class="navbar-brand" href="index.html">SCO-Enicar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -25,27 +57,27 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
             </li>
         
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="index.php" id="dropdown01" data-toggle="dropdown" aria-expanded="false">Gestion des Groupes</a>
               <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <a class="dropdown-item" href="afficherEtudiants.php">Lister tous les étudiants</a>
-                <a class="dropdown-item" href="afficherEtudiantsParClasse.php">Etudiants par Groupe</a>
-                <a class="dropdown-item" href="ajouterGroupe.php">Ajouter Groupe</a>
-                <a class="dropdown-item" href="modifierGroupe.php">Modifier Groupe</a>
-                <a class="dropdown-item" href="supprimerGroupe.php">Supprimer Groupe</a>
+                <a class="dropdown-item" href="afficherEtudiants.html">Lister tous les étudiants</a>
+                <a class="dropdown-item" href="afficherEtudiantsParClasse.html">Etudiants par Groupe</a>
+                <a class="dropdown-item" href="ajouterGroupe.html">Ajouter Groupe</a>
+                <a class="dropdown-item" href="modifierGroupe.html">Modifier Groupe</a>
+                <a class="dropdown-item" href="supprimerGroupe.html">Supprimer Groupe</a>
       
               </div>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-expanded="false">Gestion des Etudiants</a>
               <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <a class="dropdown-item" href="ajouterEtudiant.php">Ajouter Etudiant</a>
-                <a class="dropdown-item" href="chercherEtudiant.php">Chercher Etudiant</a>
-                <a class="dropdown-item" href="modifierEtudiant.php">Modifier Etudiant</a>
-                <a class="dropdown-item" href="supprimerEtudiant.php">Supprimer Etudiant</a>
+                <a class="dropdown-item" href="ajouterEtudiant.html">Ajouter Etudiant</a>
+                <a class="dropdown-item" href="chercherEtudiant.html">Chercher Etudiant</a>
+                <a class="dropdown-item" href="modifierEtudiant.html">Modifier Etudiant</a>
+                <a class="dropdown-item" href="supprimerEtudiant.html">Supprimer Etudiant</a>
       
       
               </div>
@@ -82,7 +114,7 @@
 
 
 <div class="container">
- <form id="myform" method="post">
+ <form id="myform" method="post" action="ajouter.php">
      <!--
                         TODO: Add form inputs
                         Prenom - required string with autofocus
@@ -135,8 +167,9 @@
      <textarea id="adresse" name="adresse" rows="10" cols="30" class="form-control" required>
      </textarea>
     </div>
+
      <!--Bouton Ajouter-->
-     <button  type="button" class="btn btn-primary btn-block" onclick="ajouter()">Ajouter</button>
+     <button  type="submit" class="btn btn-primary btn-block">Ajouter</button>
 
 
  </form> 
@@ -152,7 +185,7 @@
 function ajouter(){
 		
 		var xmlhttp = new XMLHttpRequest();
-        var url="ajouterEtud.php";
+        var url="http://localhost//mini-projet-info1-master/mini-projet-info1-master/ajouter.php";
 		
 		//Envoie Req
         xmlhttp.open("POST",url,true);
