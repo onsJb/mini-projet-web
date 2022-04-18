@@ -104,7 +104,7 @@
 <script>
     function refresh() {
         var xmlhttp = new XMLHttpRequest();
-        var url = "afficher.php";
+        var url = "afficherEtud.php";
 
     //Envoie de la requete
 	xmlhttp.open("GET",url,true);
