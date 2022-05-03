@@ -6,8 +6,8 @@
  }
 else {
 include("connexion.php");
-$classe=$_REQUEST['classe'];
-$req="select * from etudiant where Classe='$classe'";
+$cin=$_REQUEST['cin'];
+$req="select * from etudiant where cin='$cin'";
 $reponse = $pdo->query($req);
 if($reponse->rowCount()>0) {
 	$outputs["etudiants"]=array();

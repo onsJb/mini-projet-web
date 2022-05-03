@@ -141,7 +141,7 @@
 
  </form> 
 </div>  
-<div id="demo"></div>
+<div id="demo" class="alert"></div>
 </main>
 
 

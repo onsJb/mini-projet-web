@@ -6,7 +6,7 @@
  }
 else {
 include("connexion.php");
-$req="SELECT * FROM etudiant";
+$req="select * from etudiant";
 $reponse = $pdo->query($req);
 if($reponse->rowCount()>0) {
 	$outputs["etudiants"]=array();

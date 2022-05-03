@@ -1,26 +1,10 @@
-<?php
-   session_start();
-   if($_SESSION["autoriser"]!="oui"){
-      header("location:login.php");
-      exit();
-   }
-   if(date("H")<18)
-      $bienvenue="Bonjour et bienvenue ".
-      $_SESSION["prenomNom"].
-      " dans votre espace personnel";
-   else
-      $bienvenue="Bonsoir et bienvenue ".
-      $_SESSION["prenomNom"].
-      " dans votre espace personnel";
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCO-ENICAR Afficher Etudiants</title>
+    <title>SCO-ENICAR Ajouter Etudiant</title>
     <!-- Bootstrap core CSS -->
 <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap core JS-JQUERY -->
@@ -33,10 +17,10 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="index.php">SCO-Enicar</a>
+        <a class="navbar-brand" href="index.html">SCO-Enicar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-        </button> 
+        </button>
       
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
@@ -45,22 +29,23 @@
             </li>
         
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="index.php" id="dropdown01" data-toggle="dropdown" aria-expanded="false">Gestion des Groupes</a>              <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <a class="dropdown-item" href="afficherEtudiants.php">Lister tous les étudiants</a>
-                <a class="dropdown-item" href="afficherEtudiantsParClasse.php">Etudiants par Groupe</a>
-                <a class="dropdown-item" href="ajouterGroupe.php">Ajouter Groupe</a>
-                <a class="dropdown-item" href="modifierGroupe.php">Modifier Groupe</a>
-                <a class="dropdown-item" href="supprimerGroupe.php">Supprimer Groupe</a>
+              <a class="nav-link dropdown-toggle" href="index.html" id="dropdown01" data-toggle="dropdown" aria-expanded="false">Gestion des Groupes</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown01">
+                <a class="dropdown-item" href="afficherEtudiants.html">Lister tous les étudiants</a>
+                <a class="dropdown-item" href="afficherEtudiantsParClasse.html">Etudiants par Groupe</a>
+                <a class="dropdown-item" href="ajouterGroupe.html">Ajouter Groupe</a>
+                <a class="dropdown-item" href="modifierGroupe.html">Modifier Groupe</a>
+                <a class="dropdown-item" href="supprimerGroupe.html">Supprimer Groupe</a>
       
               </div>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-expanded="false">Gestion des Etudiants</a>
               <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <a class="dropdown-item" href="ajouterEtudiant.php">Ajouter Etudiant</a>
-                <a class="dropdown-item" href="chercherEtudiant.php">Chercher Etudiant</a>
-                <a class="dropdown-item" href="modifierEtudiant.php">Modifier Etudiant</a>
-                <a class="dropdown-item" href="supprimerEtudiant.php">Supprimer Etudiant</a>
+                <a class="dropdown-item" href="ajouterEtudiant.html">Ajouter Etudiant</a>
+                <a class="dropdown-item" href="chercherEtudiant.html">Chercher Etudiant</a>
+                <a class="dropdown-item" href="modifierEtudiant.html">Modifier Etudiant</a>
+                <a class="dropdown-item" href="supprimerEtudiant.html">Supprimer Etudiant</a>
       
       
               </div>
@@ -90,63 +75,59 @@
 <main role="main">
         <div class="jumbotron">
             <div class="container">
-              <h1 class="display-4">Liste des étudiants d'un classe</h1>
-              <p>Cliquer sur le bouton afin d'actualiser la liste!</p>
+              <h1 class="display-4">Chercher un étudiant</h1>
+              <p>Saisir le numéro de CIN de l'étudiant!</p>
             </div>
           </div>
 
+
 <div class="container">
-<form id="myform" method="POST">
+ <form id="myform" method="POST">
      
     <!--Groupe-->
     <div class="form-group">
-     <label for="classe">Classe:</label><br>
-     <input type="text" id="classe" name="classe" class="form-control" required pattern="INFO[1-3]{1}-[A-E]{1}" title="Pattern INFOX-X. Par Exemple: INFO1-A, INFO2-E, INFO3-C">
+     <label for="classe">CIN:</label><br>
+     <input type="text" id="cin" name="cin" class="form-control" required>
     </div>
 
      <!--Bouton Ajouter-->
-     <button  type="submit" class="btn btn-primary btn-block" onclick="afficher()">Afficher</button>
+     <button  type="submit" class="btn btn-primary btn-block" onclick="chercher()">Chercher</button>
 
 
- </form>
-<div class="row">
-<div class="table-responsive"> 
-    <p id="demo">Liste vide!</p>
-</div>
-</div>
-</div>
-
-<script>
-    function afficher() {
-        var xmlhttp = new XMLHttpRequest();
-        var url = "afficherEtudParGrp.php";
-
-    //Envoie de la requete
-	xmlhttp.open("POST",url,true);
-	xmlhttp.send();
+ </form> 
+</div> 
+<div id="demo" class="alert"></div> 
+</main>
 
 
-				
+<footer class="container">
+    <p>&copy; ENICAR 2021-2022</p>
+  </footer>
+  <script>
+function chercher(){
+		
+		var xmlhttp = new XMLHttpRequest();
+        var url="chercherEtud.php";
+		
+		//Envoie Req
+        xmlhttp.open("POST",url,true);
+		
 		form=document.getElementById("myform");
         formdata=new FormData(form);
 		
-		xmlhttp.send(formdata);			
-
-     //Traiter la reponse
-     xmlhttp.onreadystatechange=function()
-            {  // alert(this.readyState+" "+this.status);
-                if(this.readyState==4 && this.status==200){
-                
-                    myFunction(this.responseText);
+		xmlhttp.send(formdata);
+		
+		//Traiter Res
+		xmlhttp.onreadystatechange=function(){
+			
+			if(this.readyState==4 && this.status==200){
                     //alert(this.responseText);
-                    console.log(this.responseText);
-                    //console.log(this.responseText);
+                    myFunction(this.responseText);
                 }
-            }
+			
+		}
 
-
-    //Parse la reponse JSON
-	function myFunction(response){
+    function myFunction(response){
 		var obj=JSON.parse(response);
         //alert(obj.success);
 
@@ -155,8 +136,7 @@
 		var arr=obj.etudiants;
 		var i;
 		var out='<table class="table table-striped table-hover"><tr> <th>CIN</th><th>Nom</th><th>Prénom</th><th>Email</th><th>Adresse</th><th>Classe</th></tr>';
-		console.log(arr.length);
-    for ( i = 0; i < arr.length; i++) {
+		for ( i = 0; i < arr.length; i++) {
 			out+="<tr><td>"+
 			arr[i].cin +
 			"</td><td>"+
@@ -174,10 +154,14 @@
 		out +="</table>";
 		document.getElementById("demo").innerHTML=out;
        }
-       else document.getElementById("demo").innerHTML="Aucune Inscriptions!";
+       else {
+         document.getElementById("demo").innerHTML="Etudiant introuvable!";
+         document.getElementById("demo").style.backgroundColor="#fba";
+       }
 
     }
 }
-</script>
+	</script>
+<!-- <script  src="./assets/dist/js/inscrire.js"></script> -->
 </body>
 </html>

@@ -117,8 +117,8 @@
                 if(this.readyState==4 && this.status==200){
                 
                     myFunction(this.responseText);
-                    alert(this.responseText);
-                    console.log(this.responseText);
+                    //alert(this.responseText);
+                    //console.log(this.responseText);
                     //console.log(this.responseText);
                 }
             }
