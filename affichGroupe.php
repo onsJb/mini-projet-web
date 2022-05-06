@@ -27,4 +27,3 @@ while ($row = $reponse ->fetch(PDO::FETCH_ASSOC)) {
     echo json_encode($outputs);
 }
 }
-?>

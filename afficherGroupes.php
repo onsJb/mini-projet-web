@@ -88,7 +88,7 @@
 <script>
     function refresh() {
         var xmlhttp = new XMLHttpRequest();
-        var url = "afficherGrp.php";
+        var url = "affichGroupe.php";
 
     //Envoie de la requete
 	xmlhttp.open("GET",url,true);
