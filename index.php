@@ -24,7 +24,7 @@
 <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Custom styles for this template -->
-    <link href="./assets/dist/css/jumbotron.css" rel="stylesheet">
+    <link href="./assets/jumbotron.css" rel="stylesheet">
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -93,8 +93,8 @@
     </ul>
   
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Saisir un groupe" aria-label="Chercher un groupe">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Chercher Groupe</button>
+      <input class="form-control mr-sm-2" type="text" placeholder="Saisir un groupe" aria-label="Chercher un groupe" name="txtGrp">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="btnChercher">Chercher Groupe</button>
     </form>
   </div>
 </nav>
@@ -106,7 +106,7 @@
     <div class="container">
       <h1 class="display-3"><?php echo $bienvenue?></h1>
       <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-      <p><a class="btn btn-primary btn-lg" href="#" role="button">Mes Groupes &raquo;</a></p>
+      <p><a class="btn btn-primary btn-lg" href="afficherGroupe.php" role="button" name="btnGrp">Mes Groupes &raquo;</a></p>
     </div>
   </div>
 
