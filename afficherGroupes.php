@@ -74,7 +74,7 @@
 <main role="main">
         <div class="jumbotron">
             <div class="container">
-              <h1 class="display-4">Liste des etudiants</h1>
+              <h1 class="display-4">Liste des groupes</h1>
               <p>Cliquer sur le bouton afin d'actualiser la liste!</p>
             </div>
           </div>
@@ -88,7 +88,7 @@
 <script>
     function refresh() {
         var xmlhttp = new XMLHttpRequest();
-        var url = "afficherEtud.php";
+        var url = "afficherGrp.php";
 
     //Envoie de la requete
 	xmlhttp.open("GET",url,true);
@@ -99,13 +99,12 @@
      xmlhttp.onreadystatechange=function()
             {  // alert(this.readyState+" "+this.status);
                 if(this.readyState==4 && this.status==200){
-                
                     myFunction(this.responseText);
                     //alert(this.responseText);
                     //console.log(this.responseText);
-                    //console.log(this.responseText);
                 }
             }
+
 
     //Parse la reponse JSON
 	function myFunction(response){
@@ -114,28 +113,22 @@
 
         if (obj.success==1)
         {
-		var arr=obj.etudiants;
+		var arr=obj.classes;
 		var i;
-		var out='<table class="table table-striped table-hover"><tr> <th>CIN</th><th>Nom</th><th>Prénom</th><th>Email</th><th>Adresse</th><th>Classe</th></tr>';
+		var out='<table class="table table-striped table-hover"><tr> <th>Nom</th><th>Niveau</th><th>Groupe</th></tr>';
 		for ( i = 0; i < arr.length; i++) {
 			out+="<tr><td>"+
-			arr[i].cin +
+			arr[i].id +
 			"</td><td>"+
-			arr[i].nom+
+			arr[i].niveau+
 			"</td><td>"+
-			arr[i].prenom+
-			"</td><td>"+
-			arr[i].email+
-			"</td><td>"+
-			arr[i].adresse+
-			"</td><td>"+
-			arr[i].classe+
-			"</td></tr>" ;
+			arr[i].groupe+
+			"</td></tr>";
 		}
 		out +="</table>";
 		document.getElementById("demo").innerHTML=out;
        }
-       else document.getElementById("demo").innerHTML="Aucune Inscriptions!";
+       else document.getElementById("demo").innerHTML="Pas de groupe!";
 
     }
 }
