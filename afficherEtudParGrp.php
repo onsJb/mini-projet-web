@@ -5,9 +5,11 @@
 	exit();
  }
 else {
+
 include("connexion.php");
 $classe=$_REQUEST['classe'];
-$req="select * from etudiant where Classe='$classe'";
+
+$req="select * from etudiant where classe='$classe'";
 $reponse = $pdo->query($req);
 if($reponse->rowCount()>0) {
 	$outputs["etudiants"]=array();
@@ -26,7 +28,7 @@ while ($row = $reponse ->fetch(PDO::FETCH_ASSOC)) {
      echo json_encode($outputs);
 } else {
     $outputs["success"] = 0;
-    $outputs["message"] = "Pas d'étudiants";
+    $outputs["message"] = "Pas d'etudiants";
     // echo no users JSON
     echo json_encode($outputs);
 }

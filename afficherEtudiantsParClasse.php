@@ -1,19 +1,3 @@
-<?php
-   session_start();
-   if($_SESSION["autoriser"]!="oui"){
-      header("location:login.php");
-      exit();
-   }
-   if(date("H")<18)
-      $bienvenue="Bonjour et bienvenue ".
-      $_SESSION["prenomNom"].
-      " dans votre espace personnel";
-   else
-      $bienvenue="Bonsoir et bienvenue ".
-      $_SESSION["prenomNom"].
-      " dans votre espace personnel";
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +12,7 @@
 <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Custom styles for this template -->
-    <link href="./assets/jumbotron.css" rel="stylesheet">
+    <link href="./assets/dist/css/jumbotron.css" rel="stylesheet">
 
 </head>
 <body>
@@ -103,34 +87,27 @@
      <label for="classe">Classe:</label><br>
      <input type="text" id="classe" name="classe" class="form-control" required pattern="INFO[1-3]{1}-[A-E]{1}" title="Pattern INFOX-X. Par Exemple: INFO1-A, INFO2-E, INFO3-C">
     </div>
-
-     <!--Bouton Ajouter-->
-     <button  type="submit" class="btn btn-primary btn-block" onclick="afficher()">Afficher</button>
-
-
- </form>
+</form>
+<!--Bouton Ajouter-->
+<button  type="submit" class="btn btn-primary btn-block" onclick="afficher()">Afficher</button>
+<br>
 <div class="row">
 <div class="table-responsive"> 
-    <p id="demo">Liste vide!</p>
+    <p id="demo"></p>
 </div>
 </div>
 </div>
-
 <script>
     function afficher() {
-        var xmlhttp = new XMLHttpRequest();
+      var xmlhttp = new XMLHttpRequest();
         var url = "afficherEtudParGrp.php";
 
     //Envoie de la requete
 	xmlhttp.open("POST",url,true);
-	xmlhttp.send();
+	form=document.getElementById("myform");
+  formdata=new FormData(form);
+	xmlhttp.send(formdata);
 
-
-				
-		form=document.getElementById("myform");
-        formdata=new FormData(form);
-		
-		xmlhttp.send(formdata);			
 
      //Traiter la reponse
      xmlhttp.onreadystatechange=function()
@@ -139,11 +116,10 @@
                 
                     myFunction(this.responseText);
                     //alert(this.responseText);
-                    console.log(this.responseText);
+                    //console.log(this.responseText);
                     //console.log(this.responseText);
                 }
             }
-
 
     //Parse la reponse JSON
 	function myFunction(response){
@@ -155,8 +131,7 @@
 		var arr=obj.etudiants;
 		var i;
 		var out='<table class="table table-striped table-hover"><tr> <th>CIN</th><th>Nom</th><th>Prénom</th><th>Email</th><th>Adresse</th><th>Classe</th></tr>';
-		console.log(arr.length);
-    for ( i = 0; i < arr.length; i++) {
+		for ( i = 0; i < arr.length; i++) {
 			out+="<tr><td>"+
 			arr[i].cin +
 			"</td><td>"+
@@ -172,10 +147,11 @@
 			"</td></tr>" ;
 		}
 		out +="</table>";
-		document.getElementById("demo").innerHTML=out;
-       }
-       else document.getElementById("demo").innerHTML="Aucune Inscriptions!";
-
+		  }
+       else 
+       out="Aucune Inscriptions!";
+       
+       document.getElementById("demo").innerHTML=out;
     }
 }
 </script>

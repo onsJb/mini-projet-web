@@ -1,19 +1,3 @@
-<?php
-   session_start();
-   if($_SESSION["autoriser"]!="oui"){
-      header("location:login.php");
-      exit();
-   }
-   if(date("H")<18)
-      $bienvenue="Bonjour et bienvenue ".
-      $_SESSION["prenomNom"].
-      " dans votre espace personnel";
-   else
-      $bienvenue="Bonsoir et bienvenue ".
-      $_SESSION["prenomNom"].
-      " dans votre espace personnel";
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +12,7 @@
 <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Custom styles for this template -->
-    <link href="./assets/jumbotron.css" rel="stylesheet">
+    <link href="./assets/dist/css/jumbotron.css" rel="stylesheet">
 
 </head>
 <body onload="refresh()">
