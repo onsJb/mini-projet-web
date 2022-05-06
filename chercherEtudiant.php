@@ -90,11 +90,9 @@
      <input type="text" id="cin" name="cin" class="form-control" required>
     </div>
 
-     <!--Bouton Ajouter-->
-     <button  type="submit" class="btn btn-primary btn-block" onclick="chercher()">Chercher</button>
-
-
  </form> 
+ <!--Bouton Ajouter-->
+ <button  type="submit" class="btn btn-primary btn-block" onclick="chercher()">Chercher</button>
 </div> 
 <div id="demo" class="alert"></div> 
 </main>
@@ -107,14 +105,12 @@
 function chercher(){
 		
 		var xmlhttp = new XMLHttpRequest();
-        var url="chercherEtud.php";
+    var url="chercherEtud.php";
 		
 		//Envoie Req
-        xmlhttp.open("POST",url,true);
-		
+    xmlhttp.open("POST",url,true);
 		form=document.getElementById("myform");
-        formdata=new FormData(form);
-		
+    formdata=new FormData(form);
 		xmlhttp.send(formdata);
 		
 		//Traiter Res
