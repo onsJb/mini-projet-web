@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCO-ENICAR Afficher Etudiants</title>
+    <title>SCO-ENICAR Ajouter Etudiant</title>
     <!-- Bootstrap core CSS -->
 <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap core JS-JQUERY -->
@@ -20,7 +20,7 @@
         <a class="navbar-brand" href="index.html">SCO-Enicar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-        </button> 
+        </button>
       
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
@@ -29,7 +29,8 @@
             </li>
         
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="index.html" id="dropdown01" data-toggle="dropdown" aria-expanded="false">Gestion des Groupes</a>              <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="nav-link dropdown-toggle" href="index.html" id="dropdown01" data-toggle="dropdown" aria-expanded="false">Gestion des Groupes</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown01">
                 <a class="dropdown-item" href="afficherEtudiants.html">Lister tous les étudiants</a>
                 <a class="dropdown-item" href="afficherEtudiantsParClasse.html">Etudiants par Groupe</a>
                 <a class="dropdown-item" href="ajouterGroupe.html">Ajouter Groupe</a>
@@ -74,117 +75,73 @@
 <main role="main">
         <div class="jumbotron">
             <div class="container">
-              <h1 class="display-4">Liste des étudiants</h1>
-              <p>Choisir l'étudiant à supprimer!</p>
+              <h1 class="display-4">Supprimer un étudiant</h1>
+              <p>Saisir le numéro de CIN de l'étudiant!</p>
             </div>
           </div>
-          <div class="container">
 
-          <form id="myform" method="GET" action="ajouterGroupe.php">
-            <!--Niveau-->
-            <div class="form-group">
-            <label for="niveau">Niveau:</label><br>
-            <div class="form-check-inline">
-            <input type="radio" name="niveau" id="1ere" value="1" class="form-check-input" checked>
-            <label for="1ere" class="form-check-label">1ère année</label>
-            </div>
-            <div class="form-check-inline">
-            <input type="radio" name="niveau" id="2eme" value="2" class="form-check-input">
-            <label for="2eme" class="form-check-label">2ème année</label>
-           </div>
-           <div class="form-check-inline">
-            <input type="radio" name="niveau" id="3eme" value="3" class="form-check-input">
-            <label for="3eme" class="form-check-label">3ème année</label>
-           </div>
-           </div>
-            <!--Groupe-->
-            <div class="form-group">
-            <label for="groupe">Groupe:</label><br>
-            <input type="text" id="groupe" name="groupe" class="form-control" required>
-           </div>
-           <!--Button Afficher-->
-           <button  type="button" class="btn btn-primary btn-block active">Afficher</button>
-           <br>
-          </form>
 
-<div class="row">
-<div class="table-responsive"> 
- <table class="table table-striped table-hover">
-   <h2>1-INFO D</h2>
-     <!--Ligne Entete-->
-     <tr>
-         <th>
-             CIN
-         </th>
-         <th>
-             Nom
-         </th>
-         <th>
-             Prénom
-         </th>
-         <th>
-             Email
-         </th>
-         <th>
-             Classe
-         </th>
-         <th>
+<div class="container">
+ <form id="myform" method="POST">
+     
+    <!--Groupe-->
+    <div class="form-group">
+     <label for="classe">CIN:</label><br>
+     <input type="text" id="cin" name="cin" class="form-control" required>
+    </div>
 
-         </th>
-     </tr>
-     <!--1er Etudiant-->
-     <tr>
-         <td>
-             1111
-         </td>
-         <td>
-             N1
-         </td>
-         <td>
-             P1
-         </td>
-         <td>
-             n1.p1@gmail.com
-         </td>
-         <td>
-             INFO1D
-         </td>
-         <td>
-          <button  type="button" class="btn btn-danger active">Supprimer</button>
-        </td>
-     </tr>
-     <!--2eme Etudiant-->
-     <tr>
-        <td>
-            2222
-        </td>
-        <td>
-            N2
-        </td>
-        <td>
-            P2
-        </td>
-        <td>
-            n2.p2@gmail.com
-        </td>
-        <td>
-            INFO1E
-        </td>
-        <td>
-          <button  type="button" class="btn btn-danger active">Supprimer</button>
-        </td>
-    </tr>
- </table>
- <br>
- </div>
-</div>
-</div>
-
+ </form> 
+ <!--Bouton Ajouter-->
+ <button  type="submit" class="btn btn-primary btn-block" onclick="supprimer()">Supprimer</button>
+</div> 
+<div id="demo" class="alert"></div> 
 </main>
 
 
 <footer class="container">
     <p>&copy; ENICAR 2021-2022</p>
   </footer>
+  <script>
+function supprimer(){
+		
+		var xmlhttp = new XMLHttpRequest();
+    var url="supprimerEtud.php";
+		
+		//Envoie Req
+    xmlhttp.open("POST",url,true);
+		form=document.getElementById("myform");
+    formdata=new FormData(form);
+		xmlhttp.send(formdata);
+		
+		//Traiter Res
+		xmlhttp.onreadystatechange=function(){
+			
+			if(this.readyState==4 && this.status==200){
+                    //alert(this.responseText);
+                    myFunction(this.responseText);
+                }
+			
+		}
+
+    xmlhttp.onreadystatechange=function(){
+			
+			if(this.readyState==4 && this.status==200){
+                    //alert(this.responseText);
+                    if(this.responseText=="OK")
+                    {
+                        document.getElementById("demo").innerHTML="La suppression de l'etudiant a été bien effectuée";
+                        document.getElementById("demo").style.backgroundColor="green";
+                    }
+                    else
+                    {
+                        document.getElementById("demo").innerHTML="L'etudiant n'existe pas!";
+                        document.getElementById("demo").style.backgroundColor="#fba";
+                    }
+                }
+			
+		}
+}
+	</script>
+<!-- <script  src="./assets/dist/js/inscrire.js"></script> -->
 </body>
 </html>
