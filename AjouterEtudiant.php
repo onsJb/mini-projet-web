@@ -135,11 +135,12 @@
      <textarea id="adresse" name="adresse" rows="10" cols="30" class="form-control" required>
      </textarea>
     </div>
+    </form> 
      <!--Bouton Ajouter-->
      <button  type="button" class="btn btn-primary btn-block" onclick="ajouter()">Ajouter</button>
+    <br>
 
-
- </form> 
+ 
 </div>  
 <div id="demo" class="alert"></div>
 </main>
@@ -150,7 +151,7 @@
   </footer>
   <script>
 function ajouter(){
-		
+  document.getElementById("demo").style.backgroundColor="white";
 		var xmlhttp = new XMLHttpRequest();
         var url="ajouterEtud.php";
 		
@@ -170,12 +171,12 @@ function ajouter(){
                     if(this.responseText=="OK")
                     {
                         document.getElementById("demo").innerHTML="L'ajout de l'étudiant a été bien effectué";
-                        document.getElementById("demo").style.backgroundColor="green";
+                        document.getElementById("demo").style.backgroundColor="#B0F2B6";
                     }
                     else
                     {
                         document.getElementById("demo").innerHTML="L'étudiant est déjà inscrit, merci de vérifier le CIN";
-                        document.getElementById("demo").style.backgroundColor="#fba";
+                        document.getElementById("demo").style.backgroundColor="#F79B7D";
                     }
                 }
 			

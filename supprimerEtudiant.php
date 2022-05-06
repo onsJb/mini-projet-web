@@ -93,6 +93,7 @@
  </form> 
  <!--Bouton Ajouter-->
  <button  type="submit" class="btn btn-primary btn-block" onclick="supprimer()">Supprimer</button>
+ <br>
 </div> 
 <div id="demo" class="alert"></div> 
 </main>
@@ -103,7 +104,7 @@
   </footer>
   <script>
 function supprimer(){
-		
+  document.getElementById("demo").style.backgroundColor="white";
 		var xmlhttp = new XMLHttpRequest();
     var url="supprimerEtud.php";
 		
@@ -130,12 +131,12 @@ function supprimer(){
                     if(this.responseText=="OK")
                     {
                         document.getElementById("demo").innerHTML="La suppression de l'etudiant a été bien effectuée";
-                        document.getElementById("demo").style.backgroundColor="green";
+                        document.getElementById("demo").style.backgroundColor="#B0F2B6";
                     }
                     else
                     {
                         document.getElementById("demo").innerHTML="L'etudiant n'existe pas!";
-                        document.getElementById("demo").style.backgroundColor="#fba";
+                        document.getElementById("demo").style.backgroundColor="#F79B7D";
                     }
                 }
 			

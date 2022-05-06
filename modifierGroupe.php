@@ -106,22 +106,20 @@
         <label for="3eme" class="form-check-label">3ème année</label>
        </div>
        </div>
+       </form>
      <!--Bouton Ajouter-->
      <button  type="submit" class="btn btn-primary btn-block" onclick="modifier()">Modifier</button>
-
-
- </form> 
+    <br>
 </div>  
-<div id="demo"></div>
+<div id="demo" class="alert"></div>
 </main>
-
 
 <footer class="container">
     <p>&copy; ENICAR 2021-2022</p>
   </footer>
   <script>
 function modifier(){
-		
+  document.getElementById("demo").style.backgroundColor="white";
 		var xmlhttp = new XMLHttpRequest();
         var url="modifierGrp.php";
 		
@@ -141,14 +139,13 @@ function modifier(){
                     if(this.responseText=="OK")
                     {
                         document.getElementById("demo").innerHTML="La modification du groupe a été bien effectué";
-                        document.getElementById("demo").style.backgroundColor="green";
-                        alert("La modification du groupe a été bien effectué");
+                        document.getElementById("demo").style.backgroundColor="#B0F2B6";
                     }
                     else
                     {
                         document.getElementById("demo").innerHTML="Le groupe n'existe pas!";
-                        document.getElementById("demo").style.backgroundColor="#fba";
-                        alert("Le groupe n'existe pas!");
+                        document.getElementById("demo").style.backgroundColor="#F79B7D";
+
                     }
                 }
 			

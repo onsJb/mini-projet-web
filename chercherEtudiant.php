@@ -93,6 +93,7 @@
  </form> 
  <!--Bouton Ajouter-->
  <button  type="submit" class="btn btn-primary btn-block" onclick="chercher()">Chercher</button>
+ <br>
 </div> 
 <div id="demo" class="alert"></div> 
 </main>
@@ -103,7 +104,7 @@
   </footer>
   <script>
 function chercher(){
-		
+  document.getElementById("demo").style.backgroundColor="white";
 		var xmlhttp = new XMLHttpRequest();
     var url="chercherEtud.php";
 		
@@ -152,7 +153,7 @@ function chercher(){
        }
        else {
          document.getElementById("demo").innerHTML="Etudiant introuvable!";
-         document.getElementById("demo").style.backgroundColor="#fba";
+         document.getElementById("demo").style.backgroundColor="#F79B7D";
        }
 
     }

@@ -89,11 +89,11 @@
     </div>
 
  </form> 
- <!--Bouton Chercher-->
- <button  type="submit" class="btn btn-primary btn-block" onclick="chercher()">Chercher</button>
+ <!--Bouton Modifier-->
+ <button  type="submit" class="btn btn-primary btn-block" onclick="chercher()">Modifier</button>
 </div> 
 <br>
-<div id="demo1"></div> 
+<div id="demo" class="alert"></div> 
 </main>
 
 
@@ -102,7 +102,7 @@
   </footer>
   <script>
 function chercher(){
-		
+  document.getElementById("demo").style.backgroundColor="white";
 		var xmlhttp = new XMLHttpRequest();
     var url="chercherEtud.php";
 		
@@ -143,13 +143,13 @@ function chercher(){
 			arr[0].adresse+
       '" required></div><div class="form-group"><label for="classe">Classe:</label><br><input type="text" id="classe" name="classe" class="form-control" value="'+
 			arr[0].classe+
-			'" required></div><button  type="submit" class="btn btn-success btn-block" onclick="modifier()">Modifier</button>' ;
-		out +='</form></div><div id="demo2" class="alert-success"></div>';
-		document.getElementById("demo1").innerHTML=out;
+			'" required></div></form><button  type="submit" class="btn btn-success btn-block" onclick="modifier()">Modifier</button>' ;
+		out +='</div>';
+		document.getElementById("demo").innerHTML=out;
        }
        else {
-         document.getElementById("demo1").innerHTML="Etudiant introuvable!";
-         document.getElementById("demo1").style.backgroundColor="#fba";
+         document.getElementById("demo").innerHTML="Etudiant introuvable!";
+         document.getElementById("demo").style.backgroundColor="#F79B7D";
        }
 
     }
@@ -168,7 +168,9 @@ function modifier(){
     xmlhttp.onreadystatechange=function(){
 			
 			if(this.readyState==4 && this.status==200){
-      document.getElementById("demo2").innerHTML="La modification a été bien effectuée";
+      document.getElementById("demo").innerHTML="La modification a été bien effectuée";
+      document.getElementById("demo").style.backgroundColor="#B0F2B6";
+
     }
 			
 		}

@@ -102,11 +102,11 @@
      <label for="groupe">Groupe:</label><br>
      <input type="text" id="groupe" name="groupe" class="form-control" required pattern="[A-E]{1}" title="A,B,C...">
     </div>
+    </form> 
      <!--Bouton Ajouter-->
      <button  type="submit" class="btn btn-primary btn-block" onclick="ajouter()">Ajouter</button>
-
-
- </form>  
+     <br>
+   
 </div> 
 <div id="demo" class="alert"></div> 
 </main>
@@ -118,7 +118,7 @@
 
   <script>
 function ajouter(){
-		
+  document.getElementById("demo").style.backgroundColor="white";
 		var xmlhttp = new XMLHttpRequest();
         var url="ajouterGrp.php";
 		
@@ -138,12 +138,12 @@ function ajouter(){
                     if(this.responseText=="OK")
                     {
                         document.getElementById("demo").innerHTML="L'ajout du groupe a été bien effectué";
-                        document.getElementById("demo").style.backgroundColor="green";
+                        document.getElementById("demo").style.backgroundColor="#B0F2B6";
                     }
                     else
                     {
                         document.getElementById("demo").innerHTML="Le groupe existe déjà!";
-                        document.getElementById("demo").style.backgroundColor="#fba";
+                        document.getElementById("demo").style.backgroundColor="#F79B7D";
                     }
                 }
 			
