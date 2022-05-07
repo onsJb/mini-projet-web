@@ -81,10 +81,10 @@
           </div>
 
 <div class="container">
-<form>
+<form id="myform" method="POST" >
 <div class="form-group">
   <label for="semaine">Choisir une semaine:</label><br>
-  <input id="semaine" type="week" name="debut" size="10" class="datepicker"/>
+  <input id="semaine" type="week" name="debut" size="10" class="datepicker" onchange="myfunction()"/>
 </div>
 <div class="form-group">
   <label for="classe">Choisir un groupe:</label><br>
@@ -108,12 +108,12 @@
 <th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;">Vendredi</th>
 <th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;">Samedi</th>
 </tr><tr><td>&nbsp;</td>
-<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;">07/03/2022</th>
-<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;">08/03/2022</th>
-<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;">09/03/2022</th>
-<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;">10/03/2022</th>
-<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;">11/03/2022</th>
-<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;">12/03/2022</th>
+<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;" id="day1"></th>
+<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;" id="day2"></th>
+<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;" id="day3"></th>
+<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;" id="day4"></th>
+<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;" id="day5"></th>
+<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;" id="day6"></th>
 </tr><tr><td>&nbsp;</td>
 <th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th>
 </tr>
@@ -148,11 +148,41 @@
   </tr>
 </table>
 <br>
- <!--Bouton Valider-->
- <button  type="submit" class="btn btn-primary btn-block">Valider</button>
 </form>
+ <!--Bouton Valider-->
+ <button  type="submit" class="btn btn-primary btn-block" >Valider</button>
+<br>
 </div>  
 </main>
+
+<script>
+
+function dayToDate(year, day) {
+  const date = new Date(year, 0, day);
+
+  return date;
+}
+function myfunction(){
+  var w,y,d;
+
+  w=parseInt(document.getElementById("myform").debut.value.substr(-2));
+  y=parseInt(document.getElementById("myform").debut.value.substr(0,4));
+
+  d1=dayToDate(y,w*7-4);
+  d2=dayToDate(y,w*7-3);
+  d3=dayToDate(y,w*7-2);
+  d4=dayToDate(y,w*7-1);
+  d5=dayToDate(y,w*7);
+  d6=dayToDate(y,w*7+1);
+
+  document.getElementById("day1").innerHTML=d1.getDate()+"/"+(d1.getMonth()+1)+"/"+d1.getFullYear();
+  document.getElementById("day2").innerHTML=d2.getDate()+"/"+(d2.getMonth()+1)+"/"+d2.getFullYear();
+  document.getElementById("day3").innerHTML=d3.getDate()+"/"+(d3.getMonth()+1)+"/"+d3.getFullYear();
+  document.getElementById("day4").innerHTML=d4.getDate()+"/"+(d4.getMonth()+1)+"/"+d4.getFullYear();
+  document.getElementById("day5").innerHTML=d5.getDate()+"/"+(d5.getMonth()+1)+"/"+d5.getFullYear();
+  document.getElementById("day6").innerHTML=d6.getDate()+"/"+(d6.getMonth()+1)+"/"+d6.getFullYear();
+  }
+</script>
 
 <footer class="container">
     <p>&copy; ENICAR 2021-2022</p>
