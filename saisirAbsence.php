@@ -10,12 +10,13 @@
     <!-- Bootstrap core JS-JQUERY -->
 <script src="./assets/dist/js/jquery.min.js"></script>
 <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./assets/dist/js/liste_classe.js"></script>
 
     <!-- Custom styles for this template -->
     <link href="./assets/dist/css/jumbotron.css" rel="stylesheet">
 
 </head>
-<body>
+<body onload="liste_classe()">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="index.html">SCO-Enicar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,27 +86,10 @@
   <label for="semaine">Choisir une semaine:</label><br>
   <input id="semaine" type="week" name="debut" size="10" class="datepicker"/>
 </div>
-  <div class="form-group">
-<label for="classe">Choisir un groupe:</label><br>
-<!--
-<input list="classe">
-<datalist id="classe" name="classe">
-    <option value="1-INFOA">1-INFOA</option>
-    <option value="1-INFOB">1-INFOB</option>
-    <option value="1-INFOC">1-INFOC</option>
-    <option value="1-INFOD">1-INFOD</option>
-    <option value="1-INFOE">1-INFOE</option>
-</datalist>
--->
-<select id="classe" name="classe"  class="custom-select custom-select-sm custom-select-lg">
-    <option value="1-INFOA">1-INFOA</option>
-    <option value="1-INFOB">1-INFOB</option>
-    <option value="1-INFOC">1-INFOC</option>
-    <option value="1-INFOD">1-INFOD</option>
-    <option value="1-INFOE">1-INFOE</option>
-</select>
+<div class="form-group">
+  <label for="classe">Choisir un groupe:</label><br>
+  <div id="liste"></div>
 </div>
-
 
 <div class="form-group">
   <label for="module">Choisir un module:</label><br>
@@ -116,8 +100,7 @@
   </div>
 
 <table rules="cols" frame="box">
-  <tr><th>25 étudiants</th>
-  
+
 <th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;">Lundi</th>
 <th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;">Mardi</th>
 <th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;">Mercredi</th>
