@@ -10,12 +10,13 @@
     <!-- Bootstrap core JS-JQUERY -->
 <script src="./assets/dist/js/jquery.min.js"></script>
 <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./assets/dist/js/liste_classe.js"></script>
 
     <!-- Custom styles for this template -->
     <link href="./assets/dist/css/jumbotron.css" rel="stylesheet">
 
 </head>
-<body>
+<body onload="liste_classe()">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="index.html">SCO-Enicar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,9 +87,9 @@
      
     <!--Groupe-->
     <div class="form-group">
-     <label for="classe">Classe:</label><br>
-     <input type="text" id="classe" name="classe" class="form-control" required pattern="INFO[1-3]{1}-[A-E]{1}" title="Pattern INFOX-X. Par Exemple: INFO1-A, INFO2-E, INFO3-C">
-    </div>
+  <label for="classe">Choisir un groupe:</label><br>
+  <div id="liste"></div>
+</div>
 
      <!--Bouton Ajouter-->
      <button  type="submit" class="btn btn-primary btn-block" onclick="supprimer()">Supprimer</button>
