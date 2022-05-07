@@ -11,10 +11,8 @@
 <script src="./assets/dist/js/jquery.min.js"></script>
 <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="./assets/dist/js/liste_classe.js"></script>
-
     <!-- Custom styles for this template -->
     <link href="./assets/dist/css/jumbotron.css" rel="stylesheet">
-
 </head>
 <body onload="liste_classe()">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -79,43 +77,32 @@
               <p>Pour signaler, annuler ou justifier une absence, choisissez d'abord le groupe, le module puis l'étudiant concerné!</p>
             </div>
           </div>
-
 <div class="container">
 <form id="myform" method="POST" >
-
 <div class="form-group">
   <label for="classe">Choisir un groupe:</label><br>
   <div id="liste" onchange="liste_etudiant()" ></div>
 </div>
-
 <div class="form-group">
   <label for="semaine">Choisir une semaine:</label><br>
   <input id="semaine" type="week" name="debut" size="10" class="datepicker" onchange="myFunction()"/>
 </div>
-
 <div class="form-group" id="matiere"></div>
-
+<br>
 <div id="etudiant"></div>
-
-<br>
 </form>
- <!--Bouton Valider-->
- <button  type="submit" class="btn btn-primary btn-block">Valider</button>
 <br>
+<!--Bouton Valider-->
+<button  type="submit" class="btn btn-primary btn-block">Valider</button>
 </div>  
 </main>
-
 <script>
-
 function dayToDate(year, day) {
   const date = new Date(year, 0, day);
-
   return date;
 }
-
 function myFunction(){
   var w,y,d;
-
   w=parseInt(document.getElementById("myform").debut.value.substr(-2));
   y=parseInt(document.getElementById("myform").debut.value.substr(0,4));
 
@@ -133,18 +120,15 @@ function myFunction(){
   document.getElementById("day5").innerHTML=d5.getDate()+"/"+(d5.getMonth()+1)+"/"+d5.getFullYear();
   document.getElementById("day6").innerHTML=d6.getDate()+"/"+(d6.getMonth()+1)+"/"+d6.getFullYear();
   }
-
   function liste_etudiant(){
     liste_matiere();
     var xmlhttp = new XMLHttpRequest();
         var url = "afficherEtudParGrp.php";
-
     //Envoie de la requete
 	xmlhttp.open("POST",url,true);
 	form=document.getElementById("myform");
   formdata=new FormData(form);
 	xmlhttp.send(formdata);
-
      //Traiter la reponse
      xmlhttp.onreadystatechange=function()
             {  // alert(this.readyState+" "+this.status);
@@ -155,21 +139,19 @@ function myFunction(){
                     //console.log(this.responseText);
                 }
             }
-
     //Parse la reponse JSON
 	function myFunction(response){
 		var obj=JSON.parse(response);
         //alert(obj.success);
-
         if (obj.success==1)
         {
 		var arr=obj.etudiants;
 		var i;
-		var out='<table rules="cols" frame="box"><th></th><th width="100px" style="padding-left: 5px; padding-right: 5px;">Lundi</th><th width="100px" style="padding-left: 5px; padding-right: 5px;">Mardi</th><th width="100px" style="padding-left: 5px; padding-right: 5px;">Mercredi</th><th width="100px" style="padding-left: 5px; padding-right: 5px;">Jeudi</th><th width="100px" style="padding-left: 5px; padding-right: 5px;">Vendredi</th><th width="100px" style="padding-left: 5px; padding-right: 5px;">Samedi</th></tr><tr><td>&nbsp;</td><th width="100px" style="padding-left: 5px; padding-right: 5px;" id="day1"></th><th width="100px" style="padding-left: 5px; padding-right: 5px;" id="day2"></th><th width="100px" style="padding-left: 5px; padding-right: 5px;" id="day3"></th><th width="100px" style="padding-left: 5px; padding-right: 5px;" id="day4"></th><th width="100px" style="padding-left: 5px; padding-right: 5px;" id="day5"></th><th width="100px" style="padding-left: 5px; padding-right: 5px;" id="day6"></th></tr>';
+		var out='<table rules="cols" frame="box"><th width="200px"></th><th width="200px" style="padding-left: 5px; padding-right: 5px;">Lundi<div id="day1"></div></th><th width="200px" style="padding-left: 5px; padding-right: 5px;">Mardi<div id="day2"></div></th><th width="200px" style="padding-left: 5px; padding-right: 5px;">Mercredi<div id="day3"></div></th><th width="200px" style="padding-left: 5px; padding-right: 5px;">Jeudi<div id="day4"></div></th><th width="200px" style="padding-left: 5px; padding-right: 5px;">Vendredi<div id="day5"></div></th><th width="200px" style="padding-left: 5px; padding-right: 5px;">Samedi<div id="day6"></div></th></tr>';
 		for ( i = 0; i < arr.length; i++) {
 			out+='<tr class="row_3"><td><b>'+
-			arr[i].nom + arr[i].prenom+
-			'</b></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>' ;
+			arr[i].nom +' '+ arr[i].prenom+
+			'</b></td><td><input type="checkbox" name></td><td><input type="checkbox" ></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>' ;
 		}
     out+="</table>";
 		  }
@@ -179,17 +161,14 @@ function myFunction(){
        document.getElementById("etudiant").innerHTML=out;
     }
   }
-
   function liste_matiere(){
     var xmlhttp = new XMLHttpRequest();
         var url = "affichMatiere.php";
-
     //Envoie de la requete
 	xmlhttp.open("POST",url,true);
 	form=document.getElementById("myform");
   formdata=new FormData(form);
 	xmlhttp.send(formdata);
-
      //Traiter la reponse
      xmlhttp.onreadystatechange=function()
             {  // alert(this.readyState+" "+this.status);
@@ -199,13 +178,11 @@ function myFunction(){
                     //console.log(this.responseText);
                 }
             }
-
     //Parse la reponse JSON
 	function myFunction(response){
     console.log(response);
 		var obj=JSON.parse(response);
         //alert(obj.success);
-
         if (obj.success==1)
         {
 		var arr=obj.matieres;
@@ -220,9 +197,7 @@ function myFunction(){
        else document.getElementById("matiere").innerHTML="Pas de matiere!";
     }
   }
-
 </script>
-
 <footer class="container">
     <p>&copy; ENICAR 2021-2022</p>
   </footer>

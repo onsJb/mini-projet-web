@@ -10,12 +10,13 @@
     <!-- Bootstrap core JS-JQUERY -->
 <script src="./assets/dist/js/jquery.min.js"></script>
 <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./assets/dist/js/liste_classe.js"></script>
 
     <!-- Custom styles for this template -->
     <link href="./assets/dist/css/jumbotron.css" rel="stylesheet">
 
 </head>
-<body>
+<body onload="liste_classe()">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a class="navbar-brand" href="index.html">SCO-Enicar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,54 +81,71 @@
           </div>
 
 <div class="container">
-<form>
-  <table><tr><td>Date de début (j/m/a) : </td><td>
-    <input type="date" name="debut" size="10" value="01/09/2021" class="datepicker"/>
-    </td></tr><tr><td>Date de fin : </td><td>
-    <input type="date" name="fin" size="10" value="12/03/2022" class="datepicker"/>
-    </td></tr></table>
-
+<form id="myform" method="POST">
 <div class="form-group">
-<label for="classe">Choisir une classe:</label><br>
-<!--
-<input list="classe">
-<datalist id="classe" name="classe">
-    <option value="1-INFOA">1-INFOA</option>
-    <option value="1-INFOB">1-INFOB</option>
-    <option value="1-INFOC">1-INFOC</option>
-    <option value="1-INFOD">1-INFOD</option>
-    <option value="1-INFOE">1-INFOE</option>
-</datalist>
--->
-<select id="classe" name="classe"  class="custom-select custom-select-sm custom-select-lg">
-    <option value="1-INFOA">1-INFOA</option>
-    <option value="1-INFOB">1-INFOB</option>
-    <option value="1-INFOC">1-INFOC</option>
-    <option value="1-INFOD">1-INFOD</option>
-    <option value="1-INFOE">1-INFOE</option>
-</select>
-
+  <label for="debut">Date de début (j/m/a) : </label>
+  <input type="date" id="debut" name="debut" size="10" value="01/09/2021" class="datepicker" required/>
 </div>
 
-<div class="table-responsive"> 
-  <table class="table table-striped table-hover">
-  <thead>
-  <tr class="gt_firstrow " ><th >Nom</th><th>Justifiées</th><th >Non justifiées</th><th >Total</th></tr>
-  </thead>
-  <tbody>
-  <tr><td><b>M. SAAD WALID</b></td><td >0</td><td >0</td><td >0</td></tr>
-  <tr ><td><b>M. SAAD WALID</b></td><td >0</td><td >0</td><td >0</td></tr>
+<div class="form-group">
+  <label for="fin">Date de fin (j/m/a) : </label>    
+  <input type="date" id="fin" name="fin" size="10" value="12/03/2022" class="datepicker" required/>
+</div>
 
-  
-  </tbody>
-  <tfoot>
-  </tfoot>
-  </table>
-  </div>
-
+<div class="form-group">
+  <label for="classe">Choisir une classe:</label><br>
+  <div id="liste"></div>
+</div>
 </form>
+<!--Bouton Afficher-->
+<button  type="submit" class="btn btn-primary btn-block" onclick="afficher()">Afficher</button>
+<div id="etudiant"></div>
+
 </div>  
 </main>
+
+<script>
+    function afficher(){
+    var xmlhttp = new XMLHttpRequest();
+        var url = "etatAbs.php";
+    //Envoie de la requete
+	xmlhttp.open("POST",url,true);
+	form=document.getElementById("myform");
+  formdata=new FormData(form);
+	xmlhttp.send(formdata);
+     //Traiter la reponse
+     xmlhttp.onreadystatechange=function()
+            {  // alert(this.readyState+" "+this.status);
+                if(this.readyState==4 && this.status==200){
+                    myFunction(this.responseText);
+                    //console.log(this.responseText);
+                    //console.log(this.responseText);
+                }
+            }
+    //Parse la reponse JSON
+	function myFunction(response){
+    //alert(response);
+		var obj=JSON.parse(response);
+        //alert(obj.success);
+        if (obj.success==1)
+        {
+		var arr=obj.etudiants;
+		var i;
+		var out='<div class="table-responsive"><table class="table table-striped table-hover"><thead><tr class="gt_firstrow " ><th >Nom</th><th>Justifiées</th><th >Non justifiées</th><th >Total</th></tr></thead><tbody>';
+		for ( i = 0; i < arr.length; i++) {
+			out+='<tr><td><b>'+
+			arr[i].nom +' '+ arr[i].prenom+
+			'</b></td><td>'+arr[i].absJustif+'</td><td>'+arr[i].absNonJustif+'</td><td>'+(arr[i].absJustif+arr[i].absNonJustif)+'</td></tr>' ;
+		}
+    out+="</table>";
+		  }
+       else 
+       out="Aucune Inscriptions!";
+       document.getElementById("etudiant").innerHTML=out;
+    }
+  }
+
+</script>
 
 <footer class="container">
     <p>&copy; ENICAR 2021-2022</p>
