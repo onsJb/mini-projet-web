@@ -27,7 +27,7 @@ function liste_classe(){
         {
 		var arr=obj.classes;
 		var i;
-		var out='<select id="classe" name="classe"  class="custom-select custom-select-sm custom-select-lg">';
+		var out='<select id="classe" name="classe"  class="custom-select custom-select-sm custom-select-lg"><option value="">--</option>';
 		for ( i = 0; i < arr.length; i++) {
 			out+='<option value="'+arr[i].id+'">'+arr[i].id+'</option>';
 		}

@@ -82,75 +82,25 @@
 
 <div class="container">
 <form id="myform" method="POST" >
-<div class="form-group">
-  <label for="semaine">Choisir une semaine:</label><br>
-  <input id="semaine" type="week" name="debut" size="10" class="datepicker" onchange="myfunction()"/>
-</div>
+
 <div class="form-group">
   <label for="classe">Choisir un groupe:</label><br>
-  <div id="liste"></div>
+  <div id="liste" onchange="liste_etudiant()" ></div>
 </div>
 
 <div class="form-group">
-  <label for="module">Choisir un module:</label><br>
-  <select id="module" name="module"  class="custom-select custom-select-sm custom-select-lg">
-      <option value="1-INFOA">Tech. Web</option>
-      <option value="1-INFOB">SGBD</option>
-  </select>
-  </div>
+  <label for="semaine">Choisir une semaine:</label><br>
+  <input id="semaine" type="week" name="debut" size="10" class="datepicker" onchange="myFunction()"/>
+</div>
 
-<table rules="cols" frame="box">
+<div class="form-group" id="matiere"></div>
 
-<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;">Lundi</th>
-<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;">Mardi</th>
-<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;">Mercredi</th>
-<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;">Jeudi</th>
-<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;">Vendredi</th>
-<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;">Samedi</th>
-</tr><tr><td>&nbsp;</td>
-<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;" id="day1"></th>
-<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;" id="day2"></th>
-<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;" id="day3"></th>
-<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;" id="day4"></th>
-<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;" id="day5"></th>
-<th colspan="2" width="100px" style="padding-left: 5px; padding-right: 5px;" id="day6"></th>
-</tr><tr><td>&nbsp;</td>
-<th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th><th>AM</th><th>PM</th>
-</tr>
-<tr class="row_3"><td><b>M. WALID SAAD</b></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-</tr>
+<div id="etudiant"></div>
 
-<tr class="row_3"><td><b>M. WALID SAAD</b></td>
-  <td><input type="checkbox"></td>
-  <td><input type="checkbox"></td>
-  <td><input type="checkbox"></td>
-  <td><input type="checkbox"></td>
-  <td><input type="checkbox"></td>
-  <td><input type="checkbox"></td>
-  <td><input type="checkbox"></td>
-  <td><input type="checkbox"></td>
-  <td><input type="checkbox"></td>
-  <td><input type="checkbox"></td>
-  <td><input type="checkbox"></td>
-  <td><input type="checkbox"></td>
-  </tr>
-</table>
 <br>
 </form>
  <!--Bouton Valider-->
- <button  type="submit" class="btn btn-primary btn-block" >Valider</button>
+ <button  type="submit" class="btn btn-primary btn-block">Valider</button>
 <br>
 </div>  
 </main>
@@ -162,7 +112,8 @@ function dayToDate(year, day) {
 
   return date;
 }
-function myfunction(){
+
+function myFunction(){
   var w,y,d;
 
   w=parseInt(document.getElementById("myform").debut.value.substr(-2));
@@ -182,6 +133,94 @@ function myfunction(){
   document.getElementById("day5").innerHTML=d5.getDate()+"/"+(d5.getMonth()+1)+"/"+d5.getFullYear();
   document.getElementById("day6").innerHTML=d6.getDate()+"/"+(d6.getMonth()+1)+"/"+d6.getFullYear();
   }
+
+  function liste_etudiant(){
+    liste_matiere();
+    var xmlhttp = new XMLHttpRequest();
+        var url = "afficherEtudParGrp.php";
+
+    //Envoie de la requete
+	xmlhttp.open("POST",url,true);
+	form=document.getElementById("myform");
+  formdata=new FormData(form);
+	xmlhttp.send(formdata);
+
+     //Traiter la reponse
+     xmlhttp.onreadystatechange=function()
+            {  // alert(this.readyState+" "+this.status);
+                if(this.readyState==4 && this.status==200){
+                
+                    myFunction(this.responseText);
+                    //console.log(this.responseText);
+                    //console.log(this.responseText);
+                }
+            }
+
+    //Parse la reponse JSON
+	function myFunction(response){
+		var obj=JSON.parse(response);
+        //alert(obj.success);
+
+        if (obj.success==1)
+        {
+		var arr=obj.etudiants;
+		var i;
+		var out='<table rules="cols" frame="box"><th></th><th width="100px" style="padding-left: 5px; padding-right: 5px;">Lundi</th><th width="100px" style="padding-left: 5px; padding-right: 5px;">Mardi</th><th width="100px" style="padding-left: 5px; padding-right: 5px;">Mercredi</th><th width="100px" style="padding-left: 5px; padding-right: 5px;">Jeudi</th><th width="100px" style="padding-left: 5px; padding-right: 5px;">Vendredi</th><th width="100px" style="padding-left: 5px; padding-right: 5px;">Samedi</th></tr><tr><td>&nbsp;</td><th width="100px" style="padding-left: 5px; padding-right: 5px;" id="day1"></th><th width="100px" style="padding-left: 5px; padding-right: 5px;" id="day2"></th><th width="100px" style="padding-left: 5px; padding-right: 5px;" id="day3"></th><th width="100px" style="padding-left: 5px; padding-right: 5px;" id="day4"></th><th width="100px" style="padding-left: 5px; padding-right: 5px;" id="day5"></th><th width="100px" style="padding-left: 5px; padding-right: 5px;" id="day6"></th></tr>';
+		for ( i = 0; i < arr.length; i++) {
+			out+='<tr class="row_3"><td><b>'+
+			arr[i].nom + arr[i].prenom+
+			'</b></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>' ;
+		}
+    out+="</table>";
+		  }
+       else 
+       out="Aucune Inscriptions!";
+       
+       document.getElementById("etudiant").innerHTML=out;
+    }
+  }
+
+  function liste_matiere(){
+    var xmlhttp = new XMLHttpRequest();
+        var url = "affichMatiere.php";
+
+    //Envoie de la requete
+	xmlhttp.open("POST",url,true);
+	form=document.getElementById("myform");
+  formdata=new FormData(form);
+	xmlhttp.send(formdata);
+
+     //Traiter la reponse
+     xmlhttp.onreadystatechange=function()
+            {  // alert(this.readyState+" "+this.status);
+                if(this.readyState==4 && this.status==200){
+                    myFunction(this.responseText);
+                    //alert(this.responseText);
+                    //console.log(this.responseText);
+                }
+            }
+
+    //Parse la reponse JSON
+	function myFunction(response){
+    console.log(response);
+		var obj=JSON.parse(response);
+        //alert(obj.success);
+
+        if (obj.success==1)
+        {
+		var arr=obj.matieres;
+		var i;
+		var out='<label for="matiere">Choisir un module:</label><br><select id="matiere" name="matiere" class="custom-select custom-select-sm custom-select-lg"><option value="">--</option>';
+		for ( i = 0; i < arr.length; i++) {
+			out+='<option value="'+arr[i].nom+'">'+arr[i].nom+'</option>';
+		}
+		out +="</select>";
+		document.getElementById("matiere").innerHTML=out;
+       }
+       else document.getElementById("matiere").innerHTML="Pas de matiere!";
+    }
+  }
+
 </script>
 
 <footer class="container">
