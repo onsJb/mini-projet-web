@@ -125,11 +125,11 @@
         {
 		var arr=obj.etudiants;
 		var i;
-		var out='<div class="table-responsive"><table class="table table-striped table-hover"><thead><tr class="gt_firstrow " ><th >Nom</th><th>Justifiées</th><th >Non justifiées</th><th >Total</th></tr></thead><tbody>';
+		var out='<div class="table-responsive"><table class="table table-striped table-hover"><thead><tr class="gt_firstrow " ><th >Nom</th><th></th><th ></th><th >Nombre absences</th></tr></thead><tbody>';
 		for ( i = 0; i < arr.length; i++) {
 			out+='<tr><td><b>'+
 			arr[i].nom +' '+ arr[i].prenom+
-			'</b></td><td>'+arr[i].absJustif+'</td><td>'+arr[i].absNonJustif+'</td><td>'+(arr[i].absJustif+arr[i].absNonJustif)+'</td></tr>' ;
+			'</b></td><td></td><td></td><td>'+arr[i].abs+'</td></tr>' ;
 		}
     out+="</table>";
 		  }

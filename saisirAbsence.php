@@ -239,7 +239,7 @@ function setSemaine(){
         {
 		var arr=obj.matieres;
 		var i;
-		var out='<label for="matiere">Choisir un module:</label><br><select id="matiere" name="matiere" class="custom-select custom-select-sm custom-select-lg"><option value="">--</option>';
+		var out='<label for="matiere">Choisir un module:</label><br><select id="matiere" name="matiere" class="custom-select custom-select-sm custom-select-lg" required><option value="">--</option>';
 		for ( i = 0; i < arr.length; i++) {
 			out+='<option value="'+arr[i].nom+'">'+arr[i].nom+'</option>';
 		}

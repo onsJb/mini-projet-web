@@ -19,24 +19,15 @@ while ($row = $reponse ->fetch(PDO::FETCH_ASSOC)) {
         $cin=$row["cin"];
         $etudiant["nom"] = $row["nom"];
         $etudiant["prenom"] = $row["prenom"];
-        $reqq="select count(*) as nb from absence where cin='$cin' and justif='oui' and date between '$debut' and '$fin'";
+        $reqq="select count(*) as nb from absence where cin='$cin' and date between '$debut' and '$fin'";
         $res = $pdo->query($reqq);
         while($row = $res ->fetch(PDO::FETCH_ASSOC)){
 
         if($res->rowCount()>0) {
-            $etudiant["absJustif"]=$row["nb"];
+            $etudiant["abs"]=$row["nb"];
         }
         else 
-        $etudiant["absJustif"]=0;
-        }
-        $reqq="select count(*) as nb from absence where cin='$cin' and justif='non' and date between '$debut' and '$fin'";
-        $res = $pdo->query($reqq);
-        while($row = $res ->fetch(PDO::FETCH_ASSOC)){
-        if($res->rowCount()>0) {
-            $etudiant["absNonJustif"]=$row['nb'];
-        }
-        else
-        $etudiant["absNonJustif"]=0;
+        $etudiant["abs"]=0;
         }
          array_push($outputs["etudiants"], $etudiant);
     }
