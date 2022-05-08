@@ -58,7 +58,7 @@
       </li>
   
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="index.php" id="dropdown01" data-toggle="dropdown" aria-expanded="false">Gestion des Groupes</a>        <div class="dropdown-menu" aria-labelledby="dropdown01">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-expanded="false">Gestion des Groupes</a>        <div class="dropdown-menu" aria-labelledby="dropdown01">
           <a class="dropdown-item" href="afficherEtudiants.php">Lister tous les étudiants</a>
           <a class="dropdown-item" href="afficherEtudiantsParClasse.php">Etudiants par Groupe</a>
           <a class="dropdown-item" href="ajouterGroupe.php">Ajouter Groupe</a>
@@ -81,8 +81,8 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-expanded="false">Gestion des Absences</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="saisirAbsence.html">Saisir Absence</a>
-          <a class="dropdown-item" href="etatAbsence.html">État des absences pour un groupe</a>
+          <a class="dropdown-item" href="saisirAbsence.php">Saisir Absence</a>
+          <a class="dropdown-item" href="etatAbsence.php">État des absences pour un groupe</a>
         </div>
       </li>
 
@@ -91,11 +91,6 @@
       </li>
 
     </ul>
-  
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Saisir un groupe" aria-label="Chercher un groupe" name="txtGrp">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="btnChercher">Chercher Groupe</button>
-    </form>
   </div>
 </nav>
 
@@ -106,7 +101,7 @@
     <div class="container">
       <h1 class="display-3"><?php echo $bienvenue?></h1>
       <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-      <p><a class="btn btn-primary btn-lg" href="afficherGroupe.php" role="button" name="btnGrp">Mes Groupes &raquo;</a></p>
+      <p><a class="btn btn-primary btn-lg" href="afficherMesGroupes.php" role="button" name="btnGrp">Mes Groupes &raquo;</a></p>
     </div>
   </div>
 
@@ -115,18 +110,18 @@
     <div class="row">
       <div class="col-md-4">
         <h2>INFO1</h2>
-        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-        <p><a class="btn btn-secondary" href="#" role="button">Voir les Groupes &raquo;</a></p>
+        <p>La liste des groupes de la 1ère année Génie Informatique.</p>
+        <p><a class="btn btn-secondary" href="afficherINFO1.php" role="button">Voir les Groupes &raquo;</a></p>
       </div>
       <div class="col-md-4">
         <h2>INFO2</h2>
-        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-        <p><a class="btn btn-secondary" href="afficherGroupes.php" role="button">Voir les Groupes &raquo;</a></p>
+        <p>La liste des groupes de la 2ème année Génie Informatique.</p>
+        <p><a class="btn btn-secondary" href="afficherINFO2.php" role="button">Voir les Groupes &raquo;</a></p>
       </div>
       <div class="col-md-4">
         <h2>INFO3</h2>
-        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-        <p><a class="btn btn-secondary" href="#" role="button">Voir les Groupes &raquo;</a></p>
+        <p>La liste des groupes de la 3ème année Génie Informatique.</p>
+        <p><a class="btn btn-secondary" href="afficherINFO3.php" role="button">Voir les Groupes &raquo;</a></p>
       </div>
     </div>
 

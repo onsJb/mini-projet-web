@@ -15,6 +15,7 @@
 		 if(count($tab)>0) {  //user existe
 			//on ouvre une session a cet user
 			$_SESSION["prenomNom"]=ucfirst(strtolower($tab[0]["prenom"]))." ".strtoupper($tab[0]["nom"]);
+      $_SESSION["id"]=$tab[0]["id"];
 			/*$_SESSION["prenomNom"]=ucfirst(strtolower($tab[0]["prenom"])).
          " ".strtoupper($tab[0]["nom"]);*/
 			$_SESSION["autoriser"]="oui"; //autoriser l'acces

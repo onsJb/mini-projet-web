@@ -16,7 +16,7 @@
 </head>
 <body onload="liste_classe()">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="index.html">SCO-Enicar</a>
+        <a class="navbar-brand" href="index.php">SCO-Enicar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -24,26 +24,26 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
             </li>
         
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="index.html" id="dropdown01" data-toggle="dropdown" aria-expanded="false">Gestion des Groupes</a>              <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <a class="dropdown-item" href="afficherEtudiants.html">Lister tous les étudiants</a>
-                <a class="dropdown-item" href="afficherEtudiantsParClasse.html">Etudiants par Groupe</a>
-                <a class="dropdown-item" href="ajouterGroupe.html">Ajouter Groupe</a>
-                <a class="dropdown-item" href="modifierGroupe.html">Modifier Groupe</a>
-                <a class="dropdown-item" href="supprimerGroupe.html">Supprimer Groupe</a>
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-expanded="false">Gestion des Groupes</a>              <div class="dropdown-menu" aria-labelledby="dropdown01">
+                <a class="dropdown-item" href="afficherEtudiants.php">Lister tous les étudiants</a>
+                <a class="dropdown-item" href="afficherEtudiantsParClasse.php">Etudiants par Groupe</a>
+                <a class="dropdown-item" href="ajouterGroupe.php">Ajouter Groupe</a>
+                <a class="dropdown-item" href="modifierGroupe.php">Modifier Groupe</a>
+                <a class="dropdown-item" href="supprimerGroupe.php">Supprimer Groupe</a>
       
               </div>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-expanded="false">Gestion des Etudiants</a>
               <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <a class="dropdown-item" href="ajouterEtudiant.html">Ajouter Etudiant</a>
-                <a class="dropdown-item" href="chercherEtudiant.html">Chercher Etudiant</a>
-                <a class="dropdown-item" href="modifierEtudiant.html">Modifier Etudiant</a>
-                <a class="dropdown-item" href="supprimerEtudiant.html">Supprimer Etudiant</a>
+                <a class="dropdown-item" href="ajouterEtudiant.php">Ajouter Etudiant</a>
+                <a class="dropdown-item" href="chercherEtudiant.php">Chercher Etudiant</a>
+                <a class="dropdown-item" href="modifierEtudiant.php">Modifier Etudiant</a>
+                <a class="dropdown-item" href="supprimerEtudiant.php">Supprimer Etudiant</a>
       
       
               </div>
@@ -51,22 +51,16 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-expanded="false">Gestion des Absences</a>
               <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <a class="dropdown-item" href="saisirAbsence.html">Saisir Absence</a>
-                <a class="dropdown-item" href="etatAbsence.html">État des absences pour un groupe</a>
+                <a class="dropdown-item" href="saisirAbsence.php">Saisir Absence</a>
+                <a class="dropdown-item" href="etatAbsence.php">État des absences pour un groupe</a>
               </div>
             </li>
       
             <li class="nav-item active">
-              <a class="nav-link" href="login.html">Se Déconnecter <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="deconnexion.php">Se Déconnecter <span class="sr-only">(current)</span></a>
             </li>
-      
+
           </ul>
-        
-      
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Saisir un groupe" aria-label="Chercher un groupe">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Chercher Groupe</button>
-          </form>
         </div>
       </nav>
       
@@ -78,31 +72,89 @@
             </div>
           </div>
 <div class="container">
+<div id="demo" class="alert"></div>
 <form id="myform" method="POST" >
+
 <div class="form-group">
   <label for="classe">Choisir un groupe:</label><br>
-  <div id="liste" onchange="liste_etudiant()" ></div>
+  <div id="liste" onchange="liste_etudiant()"></div>
 </div>
+
 <div class="form-group">
   <label for="semaine">Choisir une semaine:</label><br>
-  <input id="semaine" type="week" name="debut" size="10" class="datepicker" onchange="myFunction()"/>
+  <input id="semaine" type="week" name="debut" size="10" class="datepicker" onchange="setSemaine()"/>
 </div>
+
 <div class="form-group" id="matiere"></div>
+
 <br>
 <div id="etudiant"></div>
+
 </form>
-<br>
-<!--Bouton Valider-->
-<button  type="submit" class="btn btn-primary btn-block">Valider</button>
 </div>  
 </main>
+
 <script>
+function valider(){
+  var cin=document.getElementById("cin").innerHTML;
+  var matiere=document.getElementById("myform").matiere.value;
+  var dates= [];
+
+  if(document.getElementById("d1").checked == true )
+    dates.push(document.getElementById("day1").innerHTML);
+
+  if(document.getElementById("d2").checked == true )
+    dates.push(document.getElementById("day2").innerHTML);
+
+  if(document.getElementById("d3").checked == true )
+    dates.push(document.getElementById("day3").innerHTML);
+
+  if(document.getElementById("d4").checked == true )
+    dates.push(document.getElementById("day4").innerHTML);
+
+  if(document.getElementById("d5").checked == true )
+    dates.push(document.getElementById("day5").innerHTML);
+
+  if(document.getElementById("d6").checked == true )
+    dates.push(document.getElementById("day6").innerHTML);
+
+    //alert(dates);
+  var data = new FormData();
+  data.append('cin', cin);
+  data.append('matiere', matiere);
+  data.append('dates',JSON.stringify(dates));
+
+  var xmlhttp = new XMLHttpRequest();
+  var url = "saisirAbs.php";
+	xmlhttp.open("POST",url,true);
+  xmlhttp.send(data);
+
+  xmlhttp.onreadystatechange=function(){
+			
+			if(this.readyState==4 && this.status==200){
+                    //alert(this.responseText);
+                    if(this.responseText=="OK")
+                    {
+                        document.getElementById("demo").innerHTML="Absence validée";
+                        document.getElementById("demo").style.backgroundColor="#B0F2B6";
+                    }
+                    else
+                    {
+                        document.getElementById("demo").innerHTML="Absence non validée";
+                        document.getElementById("demo").style.backgroundColor="#F79B7D";
+                    }
+                }
+			
+		}
+}
+
 function dayToDate(year, day) {
   const date = new Date(year, 0, day);
   return date;
 }
-function myFunction(){
+function setSemaine(){
   var w,y,d;
+
   w=parseInt(document.getElementById("myform").debut.value.substr(-2));
   y=parseInt(document.getElementById("myform").debut.value.substr(0,4));
 
@@ -131,9 +183,8 @@ function myFunction(){
 	xmlhttp.send(formdata);
      //Traiter la reponse
      xmlhttp.onreadystatechange=function()
-            {  // alert(this.readyState+" "+this.status);
+            {  //alert(this.readyState+" "+this.status);
                 if(this.readyState==4 && this.status==200){
-                
                     myFunction(this.responseText);
                     //console.log(this.responseText);
                     //console.log(this.responseText);
@@ -147,11 +198,11 @@ function myFunction(){
         {
 		var arr=obj.etudiants;
 		var i;
-		var out='<table rules="cols" frame="box"><th width="200px"></th><th width="200px" style="padding-left: 5px; padding-right: 5px;">Lundi<div id="day1"></div></th><th width="200px" style="padding-left: 5px; padding-right: 5px;">Mardi<div id="day2"></div></th><th width="200px" style="padding-left: 5px; padding-right: 5px;">Mercredi<div id="day3"></div></th><th width="200px" style="padding-left: 5px; padding-right: 5px;">Jeudi<div id="day4"></div></th><th width="200px" style="padding-left: 5px; padding-right: 5px;">Vendredi<div id="day5"></div></th><th width="200px" style="padding-left: 5px; padding-right: 5px;">Samedi<div id="day6"></div></th></tr>';
+		var out='<table class="table table-striped table-hover"><th width="200px"></th><th width="100px" style="padding-left: 5px; padding-right: 5px;">Lundi<br><label for="d1"><div id="day1"></div></label></th><th width="100px" style="padding-left: 5px; padding-right: 5px;">Mardi<br><label for="d"><div id="day2"></div></label></th><th width="100px" style="padding-left: 5px; padding-right: 5px;">Mercredi<br><label for="d3"><div id="day3"></div></label></th><th width="100px" style="padding-left: 5px; padding-right: 5px;">Jeudi<br><label for="d4"><div id="day4"></div></label></th><th width="100px" style="padding-left: 5px; padding-right: 5px;">Vendredi<br><label for="d5"><div id="day5"></div></label></th><th width="100px" style="padding-left: 5px; padding-right: 5px;">Samedi<br><label for="d6"><div id="day6"></div></label></th><th width="100px"></th></tr>';
 		for ( i = 0; i < arr.length; i++) {
-			out+='<tr class="row_3"><td><b>'+
+			out+='<tr class="row_3"><td id="etud"><div id="cin">'+arr[i].cin+'</div> '+'<b>'+
 			arr[i].nom +' '+ arr[i].prenom+
-			'</b></td><td><input type="checkbox" name></td><td><input type="checkbox" ></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>' ;
+			'</b></td><td><input type="checkbox" id="d1" name="d1"></td><td><input type="checkbox" id="d2" name="d2""></td><td><input type="checkbox" id="d3" name="d3"></td><td><input type="checkbox" id="d4" name="d4"></td><td><input type="checkbox" id="d5" name="d5"></td><td><input type="checkbox" id="d6" name="d6"></td><td><button  type="button" class="btn btn-primary btn-block" onclick="valider()">Valider</button></td></tr>' ;
 		}
     out+="</table>";
 		  }
@@ -161,6 +212,7 @@ function myFunction(){
        document.getElementById("etudiant").innerHTML=out;
     }
   }
+
   function liste_matiere(){
     var xmlhttp = new XMLHttpRequest();
         var url = "affichMatiere.php";
@@ -180,7 +232,7 @@ function myFunction(){
             }
     //Parse la reponse JSON
 	function myFunction(response){
-    console.log(response);
+    //console.log(response);
 		var obj=JSON.parse(response);
         //alert(obj.success);
         if (obj.success==1)
